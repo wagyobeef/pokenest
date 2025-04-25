@@ -11,7 +11,7 @@ const NavLink = ({ to, title }: { to: string; title: string }) => {
   return (
     <Link
       to={to}
-      className="text-lg text-gray-600 hover:text-red-400 transition-colors me-8 no-underline"
+      className="nav-link text-lg text-gray-500 transition-colors me-8 no-underline"
     >
       {title}
     </Link>
