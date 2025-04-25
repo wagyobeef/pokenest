@@ -1,13 +1,21 @@
 import { ReactNode } from "react";
 
 interface TopBarProps {
-  children: ReactNode;
+  left?: ReactNode;
+  middle?: ReactNode;
+  right?: ReactNode;
 }
 
-const TopBar = ({ children }: TopBarProps) => {
+const TopBar = ({ left, middle, right }: TopBarProps) => {
   return (
     <div className="fixed top-0 left-0 right-0 h-24 bg-white shadow-md z-10">
-      <div className="mx-12 h-full px-5 flex items-center">{children}</div>
+      <div className="mx-12 h-full px-5 flex items-center justify-between">
+        <div>{left}</div>
+        <div className="absolute left-1/2 -translate-x-1/2 text-center">
+          {middle}
+        </div>
+        <div>{right}</div>
+      </div>
     </div>
   );
 };

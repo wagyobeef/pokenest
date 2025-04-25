@@ -1,19 +1,18 @@
 import SearchCardsSection from "./SearchCardsSection";
-import Page from "../components/SubPage";
+import SubPage from "../components/SubPage";
 import { useState } from "react";
+import { FormattedCardType } from "../types/CardType";
+import DisplayCollectionSection from "./DisplayCollectionSection";
 
 const CreateManualCollectionPage = () => {
-  const [cards, setCards] = useState<Card[]>([]);
+  const [cards, setCards] = useState<FormattedCardType[]>([]);
 
   return (
-    <Page>
-      <p>Create Manual Collectionnn</p>
-      <div className="flex flex-col gap-2 text-center">
-        <p className="p-16 text-gray-500">Add to collection</p>
-      </div>
+    <SubPage backTo="/create-collection" title="Create Manual Collection">
+      <DisplayCollectionSection cards={cards} />
       <hr className="my-4 border-t border-black" />
-      <SearchCardsSection />
-    </Page>
+      <SearchCardsSection cards={cards} setCards={setCards} />
+    </SubPage>
   );
 };
 

@@ -1,25 +1,19 @@
 import { useState } from "react";
 import axios from "axios";
+import { CardType, FormattedCardType } from "../types/CardType";
+import LoadingIndicator from "../components/LoadingIndicator";
 
-interface Card {
-  id: string;
-  name: string;
-  setName: string;
-  imageUrl: string;
-  prices: {
-    [key: string]: {
-      market: number;
-    };
-  };
+interface SearchCardsSectionProps {
+  cards: FormattedCardType[];
+  setCards: (cards: FormattedCardType[]) => void;
 }
 
-const SearchCardsSection = () => {
+const SearchCardsSection = ({ cards, setCards }: SearchCardsSectionProps) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [cards, setCards] = useState<Card[]>([]);
+  const [searchedCards, setSearchedCards] = useState<FormattedCardType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const searchCards = async () => {
-    console.log("in search cards");
     setIsLoading(true);
     const params = {
       q: `name:${searchQuery}*`,
@@ -31,7 +25,7 @@ const SearchCardsSection = () => {
         params,
       });
       console.log(response.data);
-      const formattedCards = response.data.data.map((card: object) => {
+      const formattedCards = response.data.data.map((card: CardType) => {
         const tcgPlayerData = card.tcgplayer;
         if (tcgPlayerData == null) {
           return null;
@@ -48,10 +42,10 @@ const SearchCardsSection = () => {
           prices: tcgPlayerData.prices,
         };
       });
-      const filteredCards = formattedCards.filter((card: object) => {
+      const filteredCards = formattedCards.filter((card: FormattedCardType) => {
         return card != null;
       });
-      setCards(filteredCards);
+      setSearchedCards(filteredCards);
     } catch (error) {
       console.error("Error fetching cards:", error);
     } finally {
@@ -59,32 +53,41 @@ const SearchCardsSection = () => {
     }
   };
 
+  const addCardToCollection = (card: FormattedCardType) => {
+    setCards([...cards, card]);
+  };
+
   return (
     <div className="flex flex-col gap-4 p-4">
-      <div className="flex gap-2 justify-center">
-        <input
-          type="text"
-          className="flex-1 border-2 border-gray-200 rounded-lg py-2 px-4 focus:outline-none focus:ring-1 focus:ring-gray-200 max-w-md mb-8"
-          placeholder="Search for Pokemon cards..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button
-          className="text-black px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors self-start"
-          onClick={searchCards}
-        >
-          Search
-        </button>
+      <div className="flex justify-center">
+        <div className="flex max-w-md w-full border-2 border-gray-200 rounded-lg overflow-hidden">
+          <input
+            type="text"
+            className="flex-1 py-2 px-4 focus:outline-none"
+            placeholder="Search for Pokemon cards..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          <button
+            className="px-6 py-2 bg-white border-l border-gray-200 hover:bg-red-100 transition-colors duration-200 ease-in-out"
+            onClick={searchCards}
+          >
+            Search
+          </button>
+        </div>
       </div>
 
       {isLoading ? (
         <div className="flex justify-center">
-          <p>Loading...</p>
+          <LoadingIndicator />
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {cards.map((card) => (
-            <div key={card.id} className="border rounded-lg p-4 relative group">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-[1300px] mx-auto">
+          {searchedCards.map((card: FormattedCardType) => (
+            <div
+              key={card.id}
+              className="border rounded-lg p-4 relative group max-w-[300px] justify-self-center w-full"
+            >
               <img
                 src={card.imageUrl}
                 alt={card.name}
@@ -95,7 +98,12 @@ const SearchCardsSection = () => {
 
               {/* Hover Overlay */}
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg flex items-center justify-center">
-                <button className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                <button
+                  onClick={() => {
+                    addCardToCollection(card);
+                  }}
+                  className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+                >
                   Add to Collection
                 </button>
               </div>
