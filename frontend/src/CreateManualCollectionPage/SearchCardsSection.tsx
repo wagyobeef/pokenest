@@ -64,13 +64,13 @@ const SearchCardsSection = () => {
       <div className="flex gap-2 justify-center">
         <input
           type="text"
-          className="flex-1 border-2 border-gray-200 rounded-lg py-2 px-4 focus:outline-none focus:ring-1 focus:ring-gray-200 max-w-md"
+          className="flex-1 border-2 border-gray-200 rounded-lg py-2 px-4 focus:outline-none focus:ring-1 focus:ring-gray-200 max-w-md mb-8"
           placeholder="Search for Pokemon cards..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
         <button
-          className="bg-blue-500 text-black px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors"
+          className="text-black px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors self-start"
           onClick={searchCards}
         >
           Search

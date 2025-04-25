@@ -1,7 +1,10 @@
 import SearchCardsSection from "./SearchCardsSection";
-import Page from "../components/Page";
+import Page from "../components/SubPage";
+import { useState } from "react";
 
 const CreateManualCollectionPage = () => {
+  const [cards, setCards] = useState<Card[]>([]);
+
   return (
     <Page>
       <p>Create Manual Collectionnn</p>

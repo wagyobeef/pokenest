@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import MainPage from "./components/MainPage";
+import MainPage from "../components/MainPage";
 
 const CreateCollectionPage = () => {
   const navigate = useNavigate();

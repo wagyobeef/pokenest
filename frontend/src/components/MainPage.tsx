@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
+import Page from "./SubPage";
 
 interface MainPageProps {
   children: ReactNode;
@@ -12,7 +13,7 @@ const MainPage = ({ children }: MainPageProps) => {
         <Link to="/collections">Your Collections</Link> |{" "}
         <Link to="/create-collection">Create Collection</Link>
       </nav>
-      {children}
+      <Page>{children}</Page>
     </div>
   );
 };

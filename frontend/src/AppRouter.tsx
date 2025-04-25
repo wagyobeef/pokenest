@@ -1,17 +1,17 @@
 import { Navigate, Routes } from "react-router-dom";
 
 import { BrowserRouter, Route } from "react-router-dom";
-import CollectionsPage from "./pages/CollectionsPage";
-import CreateCollectionPage from "./pages/CreateCollectionPage";
-import GenerateCollectionPage from "./pages/GenerateCollectionPage";
-import CreateManualCollectionPage from "./pages/CreateManualCollection/CreateManualCollectionPage";
+import MyCollectionsPage from "./MyCollectionsPage/MyCollectionsPage";
+import CreateCollectionPage from "./CreateCollectionPage/CreateCollectionPage";
+import GenerateCollectionPage from "./CreateGeneratedCollectionPage/CreateGeneratedCollectionPage";
+import CreateManualCollectionPage from "./CreateManualCollectionPage/CreateManualCollectionPage";
 
 const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate to="/collections" replace />} />
-        <Route path="/collections" element={<CollectionsPage />} />
+        <Route path="/collections" element={<MyCollectionsPage />} />
         <Route path="/create-collection" element={<CreateCollectionPage />} />
         <Route
           path="/create-manual-collection"
