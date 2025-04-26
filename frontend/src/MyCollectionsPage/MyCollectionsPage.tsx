@@ -22,7 +22,7 @@ const MyCollectionsPage = () => {
       ) : (
         <div className="flex items-center justify-center h-[calc(100vh-12rem)]">
           <div className="flex flex-col items-center justify-center">
-            <p className="text-gray-500 text-lg mb-4">No collections found!</p>
+            <p className="text-gray-500 text-xl mb-4">No collections found!</p>
             <Button size="large" onClick={() => navigate("/create-collection")}>
               Create Collection
             </Button>
