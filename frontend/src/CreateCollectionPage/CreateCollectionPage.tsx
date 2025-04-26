@@ -8,7 +8,10 @@ const CreateCollectionPage = () => {
   return (
     <MainPage>
       <div className="flex items-center justify-center h-[calc(100vh-12rem)]">
-        <div className="flex flex-col items-center gap-4 w-80">
+        <div className="flex flex-col items-center w-80">
+          <p className="text-gray-500 mb-4">
+            Generate a collection based on a filter, like artist or Pokemon
+          </p>
           <Button
             size="large"
             fullWidth
@@ -16,14 +19,19 @@ const CreateCollectionPage = () => {
           >
             Generate new collection
           </Button>
-          <p className="my-4 text-[#9CA3AF] text-lg font-medium">OR</p>
+          <div className="my-8 w-full">
+            <div className="h-[1px] bg-gray-200" />
+          </div>
+          <p className="text-gray-500 mb-4">
+            Create a custom collection by searching for individual cards
+          </p>
           <Button
             size="large"
             variant="secondary"
             fullWidth
             onClick={() => navigate("/create-manual-collection")}
           >
-            Manually create collection
+            Create manual collection
           </Button>
         </div>
       </div>

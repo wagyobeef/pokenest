@@ -27,7 +27,7 @@ const Button = ({
     primary:
       "bg-[#F28B82] text-white shadow-[0_2px_8px_-1px_rgba(242,139,130,0.3)] hover:transform hover:-translate-y-0.5",
     secondary:
-      "bg-white text-gray-900 border border-gray-200 hover:border-gray-300 shadow-[0_2px_8px_-1px_rgba(0,0,0,0.1)]",
+      "bg-white text-gray-900 border border-gray-200 hover:border-gray-300 hover:transform hover:-translate-y-0.5",
   };
 
   const widthStyle = fullWidth ? "w-full" : "";
