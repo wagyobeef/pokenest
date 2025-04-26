@@ -12,7 +12,8 @@ const Button = ({
   className = "",
   ...props
 }: ButtonProps) => {
-  const baseStyles = "font-medium transition-all duration-200 rounded-lg";
+  const baseStyles =
+    "font-medium transition-all duration-200 rounded-lg cursor-pointer";
 
   const sizeStyles = {
     small: "px-4 py-1.5 text-sm",
@@ -22,7 +23,7 @@ const Button = ({
 
   const variantStyles = {
     primary:
-      "bg-[#F28B82] text-white shadow-[0_2px_8px_-1px_rgba(242,139,130,0.3)] hover:transform hover:-translate-y-1",
+      "bg-[#F28B82] text-white shadow-[0_2px_8px_-1px_rgba(242,139,130,0.3)] hover:transform hover:-translate-y-0.5",
     secondary:
       "bg-white text-gray-900 border border-gray-200 hover:border-gray-300 shadow-[0_2px_8px_-1px_rgba(0,0,0,0.1)]",
   };
