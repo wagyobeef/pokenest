@@ -32,11 +32,14 @@ const DisplayCollectionSection = ({ cards }: DisplayCollectionSectionProps) => {
               alt={card.name}
               className="w-full h-auto"
             />
-            <div className="absolute bottom-0 left-0 right-0 bg-black/75 p-3">
-              <h3 className="text-sm font-semibold truncate text-white">
-                {card.name}
-              </h3>
-              <p className="text-xs truncate text-gray-300">{card.setName}</p>
+            <div className="absolute bottom-0 left-0 right-0">
+              <div className="h-16 bg-gradient-to-t from-black/75 to-transparent"></div>
+              <div className="bg-black/75 p-3">
+                <h3 className="text-sm font-semibold truncate text-white">
+                  {card.name}
+                </h3>
+                <p className="text-xs truncate text-gray-300">{card.setName}</p>
+              </div>
             </div>
           </div>
         ))}

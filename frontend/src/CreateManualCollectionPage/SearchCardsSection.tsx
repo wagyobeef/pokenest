@@ -101,40 +101,45 @@ const SearchCardsSection = ({ cards, setCards }: SearchCardsSectionProps) => {
         </div>
       ) : (
         <>
-          <div className="flex overflow-x-auto gap-2 pb-4 hide-scrollbar">
-            {searchedCards.map((card: FormattedCardType) => (
-              <div
-                key={card.id}
-                className="relative group w-[200px] rounded-lg overflow-hidden flex-shrink-0"
-              >
-                <img
-                  src={card.imageUrl}
-                  alt={card.name}
-                  className="w-full h-auto"
-                />
-                <div className="absolute bottom-0 left-0 right-0 bg-black/75 p-3">
-                  <h3 className="text-sm font-semibold truncate text-white">
-                    {card.name}
-                  </h3>
-                  <p className="text-xs truncate text-gray-300">
-                    {card.setName}
-                  </p>
-                </div>
+          <div className="max-w-[880px] mx-auto px-4 w-full">
+            <div className="flex overflow-x-auto gap-2 pb-4 hide-scrollbar">
+              {searchedCards.map((card: FormattedCardType) => (
+                <div
+                  key={card.id}
+                  className="relative group w-[200px] rounded-lg overflow-hidden flex-shrink-0"
+                >
+                  <img
+                    src={card.imageUrl}
+                    alt={card.name}
+                    className="w-full h-auto"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0">
+                    <div className="h-16 bg-gradient-to-t from-black/75 to-transparent"></div>
+                    <div className="bg-black/75 p-3">
+                      <h3 className="text-sm font-semibold truncate text-white">
+                        {card.name}
+                      </h3>
+                      <p className="text-xs truncate text-gray-300">
+                        {card.setName}
+                      </p>
+                    </div>
+                  </div>
 
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
-                  <Button
-                    onClick={() => {
-                      addCardToCollection(card);
-                    }}
-                    variant="secondary"
-                    size="small"
-                  >
-                    Add to Collection
-                  </Button>
+                  {/* Hover Overlay */}
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
+                    <Button
+                      onClick={() => {
+                        addCardToCollection(card);
+                      }}
+                      variant="secondary"
+                      size="small"
+                    >
+                      Add to Collection
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </>
       )}
