@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { NavLink as RouterNavLink } from "react-router-dom";
 import Page from "./Page";
 import TopBar from "./TopBar";
 
@@ -9,12 +9,17 @@ interface MainPageProps {
 
 const NavLink = ({ to, title }: { to: string; title: string }) => {
   return (
-    <Link
+    <RouterNavLink
       to={to}
-      className="nav-link text-lg text-gray-500 transition-colors me-8 no-underline"
+      end
+      className={({ isActive }) =>
+        `nav-link text-base transition-colors me-8 no-underline ${
+          isActive ? "active" : ""
+        }`
+      }
     >
       {title}
-    </Link>
+    </RouterNavLink>
   );
 };
 
@@ -24,7 +29,7 @@ const MainPage = ({ children }: MainPageProps) => {
       <TopBar
         left={
           <nav>
-            <NavLink to="/collections" title="Your Collections" />
+            <NavLink to="/collections" title="My Collections" />
             <NavLink to="/create-collection" title="Create Collection" />
           </nav>
         }

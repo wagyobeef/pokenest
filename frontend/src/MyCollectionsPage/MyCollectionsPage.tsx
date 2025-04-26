@@ -1,9 +1,26 @@
 import MainPage from "../components/MainPage";
+import { useState } from "react";
+import Button from "../components/Button";
+import { useNavigate } from "react-router-dom";
 
 const MyCollectionsPage = () => {
+  const [collections, setCollections] = useState<object[]>([]);
+  const navigate = useNavigate();
+
   return (
     <MainPage>
-      <div>My Collections</div>
+      {collections.length > 0 ? (
+        <div></div>
+      ) : (
+        <div className="flex items-center justify-center h-[calc(100vh-12rem)]">
+          <div className="flex flex-col items-center justify-center">
+            <p className="text-gray-500 text-lg mb-4">No collections found!</p>
+            <Button onClick={() => navigate("/create-collection")}>
+              Create Collection
+            </Button>
+          </div>
+        </div>
+      )}
     </MainPage>
   );
 };
