@@ -3,7 +3,7 @@ interface SubPageTitleProps {
 }
 
 const SubPageTitle = ({ children }: SubPageTitleProps) => {
-  return <h2 className="text-xl font-medium">{children}</h2>;
+  return <h2 className="text-lg font-medium text-gray-600">{children}</h2>;
 };
 
 export default SubPageTitle;

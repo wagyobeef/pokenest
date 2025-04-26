@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { CardType, FormattedCardType } from "../types/CardType";
 import LoadingIndicator from "../components/LoadingIndicator";
+import Button from "../components/Button";
 
 interface SearchCardsSectionProps {
   cards: FormattedCardType[];
@@ -60,16 +61,22 @@ const SearchCardsSection = ({ cards, setCards }: SearchCardsSectionProps) => {
   return (
     <div className="flex flex-col gap-4 p-4">
       <div className="flex justify-center">
-        <div className="flex max-w-md w-full border-2 border-gray-200 rounded-lg overflow-hidden">
+        <div className="flex max-w-md w-full border-2 border-gray-200 rounded-lg overflow-hidden mb-4">
           <input
             type="text"
             className="flex-1 py-2 px-4 focus:outline-none"
             placeholder="Search for Pokemon cards..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                searchCards();
+              }
+            }}
+            spellCheck="false"
           />
           <button
-            className="px-6 py-2 bg-white border-l border-gray-200 hover:bg-red-100 transition-colors duration-200 ease-in-out"
+            className="px-6 py-2 bg-white border-l border-gray-200 hover:bg-gray-50 focus:bg-gray-50 focus:outline-none transition-colors duration-200 ease-in-out cursor-pointer"
             onClick={searchCards}
           >
             Search
@@ -78,15 +85,15 @@ const SearchCardsSection = ({ cards, setCards }: SearchCardsSectionProps) => {
       </div>
 
       {isLoading ? (
-        <div className="flex justify-center">
+        <div className="flex justify-center py-32">
           <LoadingIndicator />
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-[1300px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 max-w-[1300px] mx-auto">
           {searchedCards.map((card: FormattedCardType) => (
             <div
               key={card.id}
-              className="border rounded-lg p-4 relative group max-w-[300px] justify-self-center w-full"
+              className="border border-gray-300 rounded-lg p-3 relative group max-w-[240px] justify-self-center w-full"
             >
               <img
                 src={card.imageUrl}
@@ -98,14 +105,15 @@ const SearchCardsSection = ({ cards, setCards }: SearchCardsSectionProps) => {
 
               {/* Hover Overlay */}
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg flex items-center justify-center">
-                <button
+                <Button
                   onClick={() => {
                     addCardToCollection(card);
                   }}
-                  className="bg-white text-black px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+                  variant="secondary"
+                  size="small"
                 >
                   Add to Collection
-                </button>
+                </Button>
               </div>
             </div>
           ))}

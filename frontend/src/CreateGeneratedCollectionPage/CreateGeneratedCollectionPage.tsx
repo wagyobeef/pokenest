@@ -1,10 +1,10 @@
+import SubPage from "../components/SubPage";
+
 const GenerateCollectionPage = () => {
   return (
-    <div>
-      <p>GenerateCollection</p>
-      <input />
-      <button>search</button>
-    </div>
+    <SubPage backTo="/create-collection" title="Generate Collection">
+      hello
+    </SubPage>
   );
 };
 
