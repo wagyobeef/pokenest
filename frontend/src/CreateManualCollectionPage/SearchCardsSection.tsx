@@ -114,8 +114,8 @@ const SearchCardsSection = ({ cards, setCards }: SearchCardsSectionProps) => {
                     className="w-full h-auto"
                   />
                   <div className="absolute bottom-0 left-0 right-0">
-                    <div className="h-16 bg-gradient-to-t from-black/75 to-transparent"></div>
-                    <div className="bg-black/75 p-3">
+                    <div className="h-16 bg-gradient-to-t from-black/65 to-transparent"></div>
+                    <div className="bg-black/65 p-3">
                       <h3 className="text-sm font-semibold truncate text-white">
                         {card.name}
                       </h3>
