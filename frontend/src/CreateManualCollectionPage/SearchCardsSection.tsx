@@ -59,7 +59,7 @@ const SearchCardsSection = ({ cards, setCards }: SearchCardsSectionProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-4 p-4">
+    <div className="flex flex-col gap-4">
       <div className="flex justify-center">
         <div className="flex max-w-md w-full border-2 border-gray-200 rounded-lg overflow-hidden mb-4">
           <input
@@ -89,19 +89,21 @@ const SearchCardsSection = ({ cards, setCards }: SearchCardsSectionProps) => {
           <LoadingIndicator />
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 max-w-[1300px] mx-auto">
+        <div className="flex overflow-x-auto gap-2 pb-4 hide-scrollbar">
           {searchedCards.map((card: FormattedCardType) => (
             <div
               key={card.id}
-              className="border border-gray-300 rounded-lg p-3 relative group max-w-[240px] justify-self-center w-full"
+              className="border border-gray-300 rounded-lg p-3 relative group w-[200px] flex-shrink-0"
             >
               <img
                 src={card.imageUrl}
                 alt={card.name}
                 className="w-full h-auto"
               />
-              <h3 className="text-base font-semibold mt-2">{card.name}</h3>
-              <p className="text-sm text-gray-600">{card.setName}</p>
+              <h3 className="text-base font-semibold mt-2 truncate">
+                {card.name}
+              </h3>
+              <p className="text-sm text-gray-600 truncate">{card.setName}</p>
 
               {/* Hover Overlay */}
               <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg flex items-center justify-center">
