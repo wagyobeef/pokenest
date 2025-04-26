@@ -3,12 +3,14 @@ import { ButtonHTMLAttributes } from "react";
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
   size?: "small" | "medium" | "large";
+  fullWidth?: boolean;
 }
 
 const Button = ({
   children,
   variant = "primary",
   size = "medium",
+  fullWidth = false,
   className = "",
   ...props
 }: ButtonProps) => {
@@ -28,9 +30,11 @@ const Button = ({
       "bg-white text-gray-900 border border-gray-200 hover:border-gray-300 shadow-[0_2px_8px_-1px_rgba(0,0,0,0.1)]",
   };
 
+  const widthStyle = fullWidth ? "w-full" : "";
+
   return (
     <button
-      className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}
+      className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${widthStyle} ${className}`}
       {...props}
     >
       {children}
