@@ -10,7 +10,7 @@ const CreateManualCollectionPage = () => {
   return (
     <SubPage backTo="/create-collection" title="Create Manual Collection">
       <SearchCardsSection cards={cards} setCards={setCards} />
-      <hr className="my-4 border-t border-[#EAEAEA]" />
+      <hr className="my-8 border-t border-[#EAEAEA]" />
       <DisplayCollectionSection cards={cards} />
     </SubPage>
   );

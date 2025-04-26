@@ -60,8 +60,8 @@ const SearchCardsSection = ({ cards, setCards }: SearchCardsSectionProps) => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex justify-center">
-        <div className="flex max-w-md w-full border-2 border-gray-200 rounded-lg overflow-hidden mb-4">
+      <div className="flex flex-col items-center">
+        <div className="flex max-w-md w-full border-2 border-gray-200 rounded-lg overflow-hidden mb-2">
           <input
             type="text"
             className="flex-1 py-2 px-4 focus:outline-none"
@@ -82,6 +82,17 @@ const SearchCardsSection = ({ cards, setCards }: SearchCardsSectionProps) => {
             Search
           </button>
         </div>
+        {searchedCards.length > 0 && (
+          <button
+            onClick={() => {
+              setSearchedCards([]);
+              setSearchQuery("");
+            }}
+            className="text-blue-500 hover:text-blue-600 text-sm transition-colors cursor-pointer"
+          >
+            Clear results
+          </button>
+        )}
       </div>
 
       {isLoading ? (
@@ -89,37 +100,43 @@ const SearchCardsSection = ({ cards, setCards }: SearchCardsSectionProps) => {
           <LoadingIndicator />
         </div>
       ) : (
-        <div className="flex overflow-x-auto gap-2 pb-4 hide-scrollbar">
-          {searchedCards.map((card: FormattedCardType) => (
-            <div
-              key={card.id}
-              className="border border-gray-300 rounded-lg p-3 relative group w-[200px] flex-shrink-0"
-            >
-              <img
-                src={card.imageUrl}
-                alt={card.name}
-                className="w-full h-auto"
-              />
-              <h3 className="text-base font-semibold mt-2 truncate">
-                {card.name}
-              </h3>
-              <p className="text-sm text-gray-600 truncate">{card.setName}</p>
+        <>
+          <div className="flex overflow-x-auto gap-2 pb-4 hide-scrollbar">
+            {searchedCards.map((card: FormattedCardType) => (
+              <div
+                key={card.id}
+                className="relative group w-[200px] rounded-lg overflow-hidden flex-shrink-0"
+              >
+                <img
+                  src={card.imageUrl}
+                  alt={card.name}
+                  className="w-full h-auto"
+                />
+                <div className="absolute bottom-0 left-0 right-0 bg-black/75 p-3">
+                  <h3 className="text-sm font-semibold truncate text-white">
+                    {card.name}
+                  </h3>
+                  <p className="text-xs truncate text-gray-300">
+                    {card.setName}
+                  </p>
+                </div>
 
-              {/* Hover Overlay */}
-              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded-lg flex items-center justify-center">
-                <Button
-                  onClick={() => {
-                    addCardToCollection(card);
-                  }}
-                  variant="secondary"
-                  size="small"
-                >
-                  Add to Collection
-                </Button>
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
+                  <Button
+                    onClick={() => {
+                      addCardToCollection(card);
+                    }}
+                    variant="secondary"
+                    size="small"
+                  >
+                    Add to Collection
+                  </Button>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
