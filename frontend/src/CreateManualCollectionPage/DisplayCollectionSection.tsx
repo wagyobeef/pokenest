@@ -2,9 +2,17 @@ import { FormattedCardType } from "../types/CardType";
 
 interface DisplayCollectionSectionProps {
   cards: FormattedCardType[];
+  setCards: (cards: FormattedCardType[]) => void;
 }
 
-const DisplayCollectionSection = ({ cards }: DisplayCollectionSectionProps) => {
+const DisplayCollectionSection = ({
+  cards,
+  setCards,
+}: DisplayCollectionSectionProps) => {
+  const removeCard = (cardToRemove: FormattedCardType) => {
+    setCards(cards.filter((card) => card.id !== cardToRemove.id));
+  };
+
   if (cards.length === 0) {
     return (
       <div className="text-center text-gray-500 py-12">
@@ -23,22 +31,42 @@ const DisplayCollectionSection = ({ cards }: DisplayCollectionSectionProps) => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 place-items-center max-w-[880px] mx-auto px-4">
         {cards.map((card) => (
-          <div
-            key={card.id}
-            className="relative group w-[200px] rounded-lg overflow-hidden"
-          >
-            <img
-              src={card.imageUrl}
-              alt={card.name}
-              className="w-full h-auto"
-            />
-            <div className="absolute bottom-0 left-0 right-0">
-              <div className="h-16 bg-gradient-to-t from-black/65 to-transparent"></div>
-              <div className="bg-black/65 p-4">
-                <h3 className="text-sm font-semibold truncate text-white">
-                  {card.name}
-                </h3>
-                <p className="text-xs truncate text-gray-300">{card.setName}</p>
+          <div key={card.id} className="relative w-[200px] rounded-lg group">
+            <div className="rounded-lg overflow-hidden">
+              <img
+                src={card.imageUrl}
+                alt={card.name}
+                className="w-full h-auto"
+              />
+              <button
+                onClick={() => removeCard(card)}
+                className="absolute -top-1 -right-1 w-8 h-8 bg-white rounded-full shadow-md flex items-center justify-center transition-all duration-200 border border-[#F28B82] hover:bg-[#F28B82] cursor-pointer focus:outline-none"
+                aria-label="Remove from collection"
+              >
+                <svg
+                  className="w-5 h-5 text-[#F28B82] group-hover:text-white transition-colors duration-200"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M20 12H4"
+                  />
+                </svg>
+              </button>
+              <div className="absolute bottom-0 left-0 right-0">
+                <div className="h-16 bg-gradient-to-t from-black/65 to-transparent"></div>
+                <div className="bg-black/65 p-4 rounded-b-lg">
+                  <h3 className="text-sm font-semibold truncate text-white">
+                    {card.name}
+                  </h3>
+                  <p className="text-xs truncate text-gray-300">
+                    {card.setName}
+                  </p>
+                </div>
               </div>
             </div>
           </div>
