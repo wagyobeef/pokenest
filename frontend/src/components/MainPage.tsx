@@ -13,7 +13,7 @@ const NavLink = ({ to, title }: { to: string; title: string }) => {
       to={to}
       end
       className={({ isActive }) =>
-        `nav-link text-base transition-colors me-8 no-underline ${
+        `nav-link text-lg transition-colors me-8 no-underline ${
           isActive ? "active" : ""
         }`
       }

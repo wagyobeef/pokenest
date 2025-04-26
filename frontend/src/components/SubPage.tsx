@@ -20,7 +20,7 @@ const SubPage = ({ children, backTo, title }: SubPageProps) => {
         left={
           <ArrowLeft
             onClick={() => navigate(backTo)}
-            className="cursor-pointer w-10 h-10 p-2 rounded-full hover:bg-gray-100 transition-colors"
+            className="cursor-pointer w-11 h-11 p-2 rounded-full hover:bg-gray-100 transition-colors"
           />
         }
         middle={<SubPageTitle>{title}</SubPageTitle>}
