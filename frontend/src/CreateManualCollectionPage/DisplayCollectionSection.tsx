@@ -29,9 +29,9 @@ const DisplayCollectionSection = ({
           <span className="text-base text-gray-600">{cards.length}</span>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 place-items-center max-w-[880px] mx-auto px-4">
+      <div className="flex flex-wrap justify-center gap-4 max-w-[1200px] mx-auto px-4">
         {cards.map((card) => (
-          <div key={card.id} className="relative w-[200px] rounded-lg group">
+          <div key={card.id} className="relative w-[200px] rounded-lg">
             <div className="rounded-lg overflow-hidden">
               <img
                 src={card.imageUrl}
@@ -40,11 +40,11 @@ const DisplayCollectionSection = ({
               />
               <button
                 onClick={() => removeCard(card)}
-                className="absolute -top-1 -right-1 w-8 h-8 bg-white rounded-full shadow-md flex items-center justify-center transition-all duration-200 border border-[#F28B82] hover:bg-[#F28B82] cursor-pointer focus:outline-none"
+                className="absolute -top-1 -right-1 w-8 h-8 bg-white rounded-full shadow-md flex items-center justify-center transition-all duration-200 border border-[#F28B82] hover:bg-[#F28B82] cursor-pointer focus:outline-none [&:hover>svg]:text-white"
                 aria-label="Remove from collection"
               >
                 <svg
-                  className="w-5 h-5 text-[#F28B82] group-hover:text-white transition-colors duration-200"
+                  className="w-5 h-5 text-[#F28B82] transition-colors duration-200"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"

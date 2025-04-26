@@ -113,7 +113,7 @@ const SearchCardsSection = ({ cards, setCards }: SearchCardsSectionProps) => {
         </div>
       ) : (
         <>
-          <div className="max-w-[880px] mx-auto px-4 w-full">
+          <div className="max-w-[1200px] mx-auto px-4 w-full">
             <div className="flex overflow-x-auto gap-4 pb-4 pt-1 hide-scrollbar">
               {searchedCards.map((card: FormattedCardType) => (
                 <div
@@ -131,7 +131,7 @@ const SearchCardsSection = ({ cards, setCards }: SearchCardsSectionProps) => {
                       className={`absolute -top-1 -right-1 w-8 h-8 rounded-full shadow-md flex items-center justify-center transition-all duration-200 border cursor-pointer focus:outline-none ${
                         addedCardIds.has(card.id)
                           ? "bg-green-500 border-green-500 hover:bg-green-600"
-                          : "bg-white border-gray-600 hover:bg-gray-50"
+                          : "bg-white border-gray-400 hover:bg-gray-50"
                       }`}
                       aria-label={
                         addedCardIds.has(card.id)
