@@ -7,6 +7,7 @@ import Button from "../components/Button";
 
 const CreateManualCollectionPage = () => {
   const [addedCards, setAddedCards] = useState<FormattedCardType[]>([]);
+  const [collectionName, setCollectionName] = useState("");
 
   return (
     <SubPage backTo="/create-collection" title="Create Manual Collection">
@@ -18,6 +19,8 @@ const CreateManualCollectionPage = () => {
       <DisplayCollectionSection
         addedCards={addedCards}
         setAddedCards={setAddedCards}
+        collectionName={collectionName}
+        setCollectionName={setCollectionName}
       />
       <div className="sticky bottom-4 w-full flex justify-end pr-4">
         <Button variant="primary" size="large">

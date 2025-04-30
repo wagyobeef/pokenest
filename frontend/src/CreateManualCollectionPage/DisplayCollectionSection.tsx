@@ -1,17 +1,18 @@
-import { useState } from "react";
 import { FormattedCardType } from "../types/CardType";
 
 interface DisplayCollectionSectionProps {
   addedCards: FormattedCardType[];
   setAddedCards: (cards: FormattedCardType[]) => void;
+  collectionName: string;
+  setCollectionName: (name: string) => void;
 }
 
 const DisplayCollectionSection = ({
   addedCards,
   setAddedCards,
+  collectionName,
+  setCollectionName,
 }: DisplayCollectionSectionProps) => {
-  const [collectionName, setCollectionName] = useState("");
-
   const removeCard = (cardToRemove: FormattedCardType) => {
     setAddedCards(addedCards.filter((card) => card.id !== cardToRemove.id));
   };
