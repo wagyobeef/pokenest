@@ -35,7 +35,7 @@ const MainPage = ({ children }: MainPageProps) => {
       <TopBar
         left={
           <nav>
-            <NavLink to="/collections" title="My Collections" />
+            <NavLink to="/my-collections" title="My Collections" />
             <NavLink to="/create-collection" title="Create Collection" />
           </nav>
         }

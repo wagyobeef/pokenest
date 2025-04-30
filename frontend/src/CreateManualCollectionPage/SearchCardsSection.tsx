@@ -4,11 +4,14 @@ import { CardType, FormattedCardType } from "../types/CardType";
 import LoadingIndicator from "../components/LoadingIndicator";
 
 interface SearchCardsSectionProps {
-  cards: FormattedCardType[];
-  setCards: (cards: FormattedCardType[]) => void;
+  addedCards: FormattedCardType[];
+  setAddedCards: (cards: FormattedCardType[]) => void;
 }
 
-const SearchCardsSection = ({ cards, setCards }: SearchCardsSectionProps) => {
+const SearchCardsSection = ({
+  addedCards,
+  setAddedCards,
+}: SearchCardsSectionProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchedCards, setSearchedCards] = useState<FormattedCardType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -56,11 +59,11 @@ const SearchCardsSection = ({ cards, setCards }: SearchCardsSectionProps) => {
   };
 
   const toggleCardInCollection = (card: FormattedCardType) => {
-    const isInCollection = cards.some((c) => c.id === card.id);
+    const isInCollection = addedCards.some((c) => c.id === card.id);
     if (isInCollection) {
-      setCards(cards.filter((c) => c.id !== card.id));
+      setAddedCards(addedCards.filter((c) => c.id !== card.id));
     } else {
-      setCards([card, ...cards]);
+      setAddedCards([card, ...addedCards]);
     }
   };
 
@@ -127,17 +130,17 @@ const SearchCardsSection = ({ cards, setCards }: SearchCardsSectionProps) => {
                       <button
                         onClick={() => toggleCardInCollection(card)}
                         className={`absolute -top-1 -right-1 w-8 h-8 rounded-full shadow-md flex items-center justify-center transition-all duration-200 border cursor-pointer focus:outline-none ${
-                          cards.some((c) => c.id === card.id)
+                          addedCards.some((c) => c.id === card.id)
                             ? "bg-green-500 border-green-500 hover:bg-green-600"
                             : "bg-white border-gray-400 hover:bg-gray-50"
                         }`}
                         aria-label={
-                          cards.some((c) => c.id === card.id)
+                          addedCards.some((c) => c.id === card.id)
                             ? "Remove from collection"
                             : "Add to collection"
                         }
                       >
-                        {cards.some((c) => c.id === card.id) ? (
+                        {addedCards.some((c) => c.id === card.id) ? (
                           <svg
                             className="w-5 h-5 text-white"
                             fill="none"

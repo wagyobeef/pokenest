@@ -2,18 +2,18 @@ import { useState } from "react";
 import { FormattedCardType } from "../types/CardType";
 
 interface DisplayCollectionSectionProps {
-  cards: FormattedCardType[];
-  setCards: (cards: FormattedCardType[]) => void;
+  addedCards: FormattedCardType[];
+  setAddedCards: (cards: FormattedCardType[]) => void;
 }
 
 const DisplayCollectionSection = ({
-  cards,
-  setCards,
+  addedCards,
+  setAddedCards,
 }: DisplayCollectionSectionProps) => {
   const [collectionName, setCollectionName] = useState("");
 
   const removeCard = (cardToRemove: FormattedCardType) => {
-    setCards(cards.filter((card) => card.id !== cardToRemove.id));
+    setAddedCards(addedCards.filter((card) => card.id !== cardToRemove.id));
   };
 
   return (
@@ -29,18 +29,18 @@ const DisplayCollectionSection = ({
           }`}
         />
         <div className="mt-2 text-gray-500 text-base text-center">
-          {cards.length} eggs in nest
+          {addedCards.length} eggs in nest
         </div>
       </div>
 
-      {cards.length === 0 ? (
+      {addedCards.length === 0 ? (
         <div className="text-center text-gray-500 py-8 text-lg max-w-md mx-auto">
           No cards added yet. Search and select cards above to start building
           your collection!
         </div>
       ) : (
         <div className="flex flex-wrap justify-center gap-4 max-w-[1200px] mx-auto px-4">
-          {cards.map((card) => (
+          {addedCards.map((card) => (
             <div key={card.id} className="relative w-[200px] rounded-lg">
               <div className="rounded-lg overflow-hidden">
                 <img

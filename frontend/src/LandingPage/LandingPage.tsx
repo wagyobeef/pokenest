@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { SignInButton } from "@clerk/clerk-react";
 import Button from "../components/Button";
 
 const LandingPage = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     setIsVisible(true);
@@ -26,13 +25,11 @@ const LandingPage = () => {
         <div className="w-[800px] h-96 bg-gray-100 rounded-lg mb-4 flex items-center justify-center text-gray-400 mx-auto">
           placeholder image
         </div>
-        <Button
-          variant="primary"
-          size="large"
-          onClick={() => navigate("/sign-in")}
-        >
-          Sign-in
-        </Button>
+        <SignInButton mode="modal">
+          <Button variant="primary" size="large">
+            Sign-in
+          </Button>
+        </SignInButton>
       </div>
     </div>
   );

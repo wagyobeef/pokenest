@@ -3,15 +3,27 @@ import SubPage from "../components/SubPage";
 import { useState } from "react";
 import { FormattedCardType } from "../types/CardType";
 import DisplayCollectionSection from "./DisplayCollectionSection";
+import Button from "../components/Button";
 
 const CreateManualCollectionPage = () => {
-  const [cards, setCards] = useState<FormattedCardType[]>([]);
+  const [addedCards, setAddedCards] = useState<FormattedCardType[]>([]);
 
   return (
     <SubPage backTo="/create-collection" title="Create Manual Collection">
-      <SearchCardsSection cards={cards} setCards={setCards} />
+      <SearchCardsSection
+        addedCards={addedCards}
+        setAddedCards={setAddedCards}
+      />
       <hr className="my-8 border-t border-[#E0E0E0]" />
-      <DisplayCollectionSection cards={cards} setCards={setCards} />
+      <DisplayCollectionSection
+        addedCards={addedCards}
+        setAddedCards={setAddedCards}
+      />
+      <div className="sticky bottom-4 w-full flex justify-end pr-4">
+        <Button variant="primary" size="large">
+          Create Collection
+        </Button>
+      </div>
     </SubPage>
   );
 };
