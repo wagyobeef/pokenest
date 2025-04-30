@@ -18,19 +18,19 @@ const DisplayCollectionSection = ({
 
   return (
     <div>
-      <div className="flex items-center mb-8 ms-8 justify-center">
-        <div className="mr-4 flex items-center justify-center bg-gray-100 rounded-full h-7 w-7">
-          <span className="text-base text-gray-600">{cards.length}</span>
-        </div>
+      <div className="flex flex-col items-center mb-8 ms-8 justify-center">
         <input
           type="text"
           value={collectionName}
           onChange={(e) => setCollectionName(e.target.value)}
           placeholder="Collection Name"
-          className={`text-xl font-semibold text-gray-900 bg-transparent outline-none focus:outline-none placeholder-gray-400 w-auto ${
+          className={`text-xl font-semibold text-gray-900 bg-transparent outline-none focus:outline-none placeholder-gray-400 w-auto text-center ${
             collectionName === "" ? "border-b-2 border-gray-200" : ""
           }`}
         />
+        <div className="mt-2 text-gray-500 text-base text-center">
+          {cards.length} eggs in nest
+        </div>
       </div>
 
       {cards.length === 0 ? (
