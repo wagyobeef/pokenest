@@ -1,6 +1,6 @@
-import { Navigate, Routes } from "react-router-dom";
-
+import { Routes } from "react-router-dom";
 import { BrowserRouter, Route } from "react-router-dom";
+import LandingPage from "./LandingPage/LandingPage";
 import MyCollectionsPage from "./MyCollectionsPage/MyCollectionsPage";
 import CreateCollectionPage from "./CreateCollectionPage/CreateCollectionPage";
 import GenerateCollectionPage from "./CreateGeneratedCollectionPage/CreateGeneratedCollectionPage";
@@ -10,7 +10,7 @@ const AppRouter = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/collections" replace />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/collections" element={<MyCollectionsPage />} />
         <Route path="/create-collection" element={<CreateCollectionPage />} />
         <Route
