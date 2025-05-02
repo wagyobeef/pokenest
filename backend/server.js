@@ -5,6 +5,12 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const axios = require("axios");
+const { ClerkExpressRequireAuth } = require("@clerk/clerk-sdk-node");
+const { Clerk } = require("@clerk/clerk-sdk-node");
+
+// Initialize Clerk
+const clerk = new Clerk({ apiKey: process.env.CLERK_SECRET_KEY });
+
 const corsOptions = {
   origin: "http://localhost:5173",
   methods: "GET",
@@ -18,11 +24,19 @@ app.get("/", (req, res) => {
   res.send("Hello from Express!");
 });
 
-app.get("/search-cards", async (req, res) => {
+app.get("/search-cards", ClerkExpressRequireAuth(), async (req, res) => {
   const isDebugMode = process.env.DEBUG_MODE ?? false;
+
+  // Access the authenticated user's information
+  const userId = req.auth.userId;
+  const userEmail = req.auth.user?.emailAddresses[0]?.emailAddress;
+
   if (isDebugMode) {
     console.log("Status: in search cards");
+    console.log("Authenticated User ID:", userId);
+    console.log("User Email:", userEmail);
   }
+
   const q = req.query.q;
   if (isDebugMode) {
     console.log(`q: ${q}`);
