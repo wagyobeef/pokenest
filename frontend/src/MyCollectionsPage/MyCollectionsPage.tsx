@@ -8,6 +8,7 @@ const MyCollectionsPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setCollections([]);
     // const fetchCollections = async () => {
     //   const response = await fetch("/api/collections");
     //   const data = await response.json();
