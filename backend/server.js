@@ -5,7 +5,20 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const axios = require("axios");
+const mongoose = require("mongoose");
 const { ClerkExpressRequireAuth } = require("@clerk/clerk-sdk-node");
+
+// Connect to MongoDB first
+mongoose
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("🟢 Connected to MongoDB Atlas"))
+  .catch((err) => {
+    console.error("❌ MongoDB connection error:", err);
+    process.exit(1); // Exit if we can't connect to the database
+  });
 
 const corsOptions = {
   origin: "http://localhost:5173",
