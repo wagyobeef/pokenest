@@ -6,6 +6,7 @@ const app = express();
 const cors = require("cors");
 const axios = require("axios");
 const mongoose = require("mongoose");
+const Collection = require("./models/Collection");
 const { ClerkExpressRequireAuth } = require("@clerk/clerk-sdk-node");
 
 // Connect to MongoDB first
@@ -71,6 +72,38 @@ app.get("/search-cards", ClerkExpressRequireAuth(), async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Error fetching cards from the API." });
+  }
+});
+
+app.post("/create-collection", ClerkExpressRequireAuth(), async (req, res) => {
+  const isDebugMode = process.env.DEBUG_MODE ?? false;
+  if (isDebugMode) {
+    console.log("Status: creating new collection");
+    console.log("User ID:", req.auth.userId);
+  }
+
+  try {
+    const { name } = req.body;
+
+    if (!name) {
+      return res.status(400).json({ message: "Collection name is required" });
+    }
+
+    const collection = new Collection({
+      userId: req.auth.userId,
+      name: name,
+    });
+
+    const savedCollection = await collection.save();
+
+    if (isDebugMode) {
+      console.log("Created collection:", savedCollection);
+    }
+
+    res.status(201).json(savedCollection);
+  } catch (error) {
+    console.error("Error creating collection:", error);
+    res.status(500).json({ message: "Error creating collection" });
   }
 });
 

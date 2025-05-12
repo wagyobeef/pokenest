@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { CardType, FormattedCardType } from "../types/CardType";
 import LoadingIndicator from "../components/LoadingIndicator";
+import { useAuth } from "@clerk/clerk-react";
 
 interface SearchCardsSectionProps {
   addedCards: FormattedCardType[];
@@ -16,6 +17,7 @@ const SearchCardsSection = ({
   const [searchedCards, setSearchedCards] = useState<FormattedCardType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const { getToken } = useAuth();
 
   const searchCards = async () => {
     setIsLoading(true);
@@ -25,9 +27,13 @@ const SearchCardsSection = ({
     };
 
     try {
+      const token = await getToken();
       const apiURL = import.meta.env.VITE_SERVER_URL;
       const response = await axios.get(`${apiURL}/search-cards`, {
         params,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
       console.log(response.data);
       const formattedCards = response.data.data.map((card: CardType) => {
