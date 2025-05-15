@@ -29,7 +29,7 @@ const CreateManualCollectionPage = () => {
     try {
       const token = await getToken();
       const response = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/create-collection`,
+        `${import.meta.env.VITE_SERVER_URL}/collections`,
         {
           method: "POST",
           headers: {

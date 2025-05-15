@@ -1,5 +1,10 @@
+const express = require("express");
+const router = express.Router();
+const Collection = require("../models/Collection");
+const { ClerkExpressRequireAuth } = require("@clerk/clerk-sdk-node");
+
 // Create a new collection for a user
-app.post("/create-collection", ClerkExpressRequireAuth(), async (req, res) => {
+router.post("/", ClerkExpressRequireAuth(), async (req, res) => {
   const isDebugMode = process.env.DEBUG_MODE ?? false;
   if (isDebugMode) {
     console.log("Status: creating new collection");
@@ -32,7 +37,7 @@ app.post("/create-collection", ClerkExpressRequireAuth(), async (req, res) => {
 });
 
 // Get all collections for a user
-app.get("/get-collections", ClerkExpressRequireAuth(), async (req, res) => {
+router.get("/", ClerkExpressRequireAuth(), async (req, res) => {
   const isDebugMode = process.env.DEBUG_MODE ?? false;
   try {
     const userId = req.auth.userId;
@@ -46,3 +51,5 @@ app.get("/get-collections", ClerkExpressRequireAuth(), async (req, res) => {
     res.status(500).json({ message: "Error fetching collections" });
   }
 });
+
+module.exports = router;
