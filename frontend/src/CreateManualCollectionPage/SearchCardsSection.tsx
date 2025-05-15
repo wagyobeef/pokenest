@@ -13,6 +13,7 @@ const SearchCardsSection = ({
   addedCards,
   setAddedCards,
 }: SearchCardsSectionProps) => {
+  const showLogs = import.meta.env.VITE_SHOW_LOGS === "true";
   const [searchQuery, setSearchQuery] = useState("");
   const [searchedCards, setSearchedCards] = useState<FormattedCardType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -20,6 +21,9 @@ const SearchCardsSection = ({
   const { getToken } = useAuth();
 
   const searchCards = async () => {
+    if (showLogs) {
+      console.log("Searching for cards...");
+    }
     setIsLoading(true);
     setHasSearched(true);
     const params = {
@@ -35,7 +39,9 @@ const SearchCardsSection = ({
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response.data);
+      if (showLogs) {
+        console.log(response.data);
+      }
       const formattedCards = response.data.data.map((card: CardType) => {
         const tcgPlayerData = card.tcgplayer;
         if (tcgPlayerData == null) {
