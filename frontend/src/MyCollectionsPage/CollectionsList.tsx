@@ -1,14 +1,16 @@
-import { Collection } from "../types/CollectionType";
+import { CollectionType } from "../types/CollectionType";
+import CollectionsListItem from "./CollectionsListItem";
 
 interface CollectionsListProps {
-  collections: Collection[];
+  collections: CollectionType[];
 }
 
 const CollectionsList = ({ collections }: CollectionsListProps) => {
+  console.log(collections);
   return (
     <div>
-      {collections.map((collection: Collection) => (
-        <p key={collection._id}>{collection.name}</p>
+      {collections.map((collection: CollectionType) => (
+        <CollectionsListItem key={collection._id} collection={collection} />
       ))}
     </div>
   );

@@ -4,10 +4,10 @@ import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@clerk/clerk-react";
 import CollectionsList from "./CollectionsList";
-import { Collection } from "../types/CollectionType";
+import { CollectionType } from "../types/CollectionType";
 
 const MyCollectionsPage = () => {
-  const [collections, setCollections] = useState<Collection[]>([]);
+  const [collections, setCollections] = useState<CollectionType[]>([]);
   const navigate = useNavigate();
   const { getToken } = useAuth();
 
