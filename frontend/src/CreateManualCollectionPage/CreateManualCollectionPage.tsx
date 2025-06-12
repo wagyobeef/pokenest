@@ -38,6 +38,7 @@ const CreateManualCollectionPage = () => {
           },
           body: JSON.stringify({
             name: collectionName,
+            cardIds: addedCards.map((card) => card.id),
           }),
         }
       );

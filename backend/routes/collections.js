@@ -12,7 +12,7 @@ router.post("/", ClerkExpressRequireAuth(), async (req, res) => {
   }
 
   try {
-    const { name } = req.body;
+    const { name, cardIds } = req.body;
 
     if (!name) {
       return res.status(400).json({ message: "Collection name is required" });
@@ -21,6 +21,7 @@ router.post("/", ClerkExpressRequireAuth(), async (req, res) => {
     const collection = new Collection({
       userId: req.auth.userId,
       name: name,
+      cardIds: cardIds || [],
     });
 
     const savedCollection = await collection.save();

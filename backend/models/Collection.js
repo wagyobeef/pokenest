@@ -9,6 +9,10 @@ const collectionSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  cardIds: {
+    type: [String],
+    default: [],
+  },
   createdAt: {
     type: Date,
     default: Date.now,
