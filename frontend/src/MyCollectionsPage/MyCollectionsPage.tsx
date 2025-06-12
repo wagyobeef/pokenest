@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@clerk/clerk-react";
 import CollectionsList from "./CollectionsList";
 import { CollectionType } from "../types/CollectionType";
+import LoadingIndicator from "../components/LoadingIndicator";
 
 const MyCollectionsPage = () => {
   const [collections, setCollections] = useState<CollectionType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
   const { getToken } = useAuth();
 
@@ -28,6 +30,8 @@ const MyCollectionsPage = () => {
         setCollections(data);
       } catch (error) {
         console.error("Error fetching collections:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchCollections();
@@ -35,7 +39,11 @@ const MyCollectionsPage = () => {
 
   return (
     <MainPage>
-      {collections.length > 0 ? (
+      {isLoading ? (
+        <div className="flex items-center justify-center h-[calc(100vh-12rem)]">
+          <LoadingIndicator />
+        </div>
+      ) : collections.length > 0 ? (
         <CollectionsList collections={collections} />
       ) : (
         <div className="flex items-center justify-center h-[calc(100vh-12rem)]">
